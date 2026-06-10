@@ -48,10 +48,9 @@ function submitFinancing(event) {
 function submitTasacion(event) {
     event.preventDefault(); // Evita que la página se recargue
     
-    // Obtener el formulario
     const form = event.target;
     
-    // Obtener los valores de los campos
+    // Obtener los valores
     const brand = form.brand.value;
     const model = form.model.value;
     const year = form.year.value;
@@ -60,32 +59,29 @@ function submitTasacion(event) {
     const client_name = form.client_name.value;
     const client_phone = form.client_phone.value;
     
-    // TU NÚMERO DE WHATSAPP (cambialo por el tuyo)
-    // Formato: código de país + número (sin el + ni espacios)
-    // Ejemplo Argentina: 5492231234567 (54 = país, 9 = celular, 223 = zona, resto = número)
-    const tuNumeroWhatsApp = '5492235254339'; // ⚠️ CAMBIA ESTO POR TU NÚMERO REAL
+    // ⚠️ CAMBIÁ ESTO POR TU NÚMERO REAL
+    const tuNumeroWhatsApp = '5492235254339'; 
     
-    // Crear el mensaje
-    const mensaje = `*🚗 CONSULTA DE COTIZACIÓN - GUZZI AUTOS*%0A%0A` +
-                    `*Datos del Auto:*%0A` +
-                    `📌 Marca: ${brand}%0A` +
-                    `📌 Modelo: ${model}%0A` +
-                    `📌 Año: ${year}%0A` +
-                    `📌 Kilometraje: ${kilometers}%0A` +
-                    `📌 Estado: ${condition}%0A%0A` +
-                    `*Datos del Cliente:*%0A` +
-                    `👤 Nombre: ${client_name}%0A` +
-                    `📞 Teléfono: ${client_phone}%0A%0A` +
-                    `Quisiera saber el valor de cotización. Gracias!`;
+    // Armamos el mensaje usando \n para los saltos de línea (es más limpio)
+    const mensaje = `🚗 *CONSULTA DE TASACIÓN - GUZZI AUTOS*\n\n` +
+                    `*Datos del Auto:*\n` +
+                    ` Marca: ${brand}\n` +
+                    `📌 Modelo: ${model}\n` +
+                    `📌 Año: ${year}\n` +
+                    `📌 Kilometraje: ${kilometers}\n` +
+                    ` Estado: ${condition}\n\n` +
+                    `*Datos del Cliente:*\n` +
+                    `👤 Nombre: ${client_name}\n` +
+                    `📞 Teléfono: ${client_phone}\n\n` +
+                    `Quisiera saber el valor de tasación. ¡Gracias!`;
     
-    // Crear la URL de WhatsApp
-    const whatsappURL = `https://wa.me/${tuNumeroWhatsApp}?text=${mensaje}`;
+    // encodeURIComponent transforma los emojis y espacios para que la URL no se rompa
+    const whatsappURL = `https://wa.me/${tuNumeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
     
-    // Abrir WhatsApp en una nueva pestaña
+    // Abrir WhatsApp
     window.open(whatsappURL, '_blank');
     
-    // Opcional: Mostrar mensaje de éxito y limpiar el formulario
-    alert('¡Perfecto! Te redirigimos a WhatsApp para completar la consulta.');
+    // Limpiar el formulario después de enviar
     form.reset();
 }
 
