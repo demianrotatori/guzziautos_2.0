@@ -46,7 +46,7 @@ function submitFinancing(event) {
 }
 
 function submitTasacion(event) {
-    event.preventDefault(); // Evita que la página se recargue
+    event.preventDefault(); 
     
     const form = event.target;
     
@@ -59,29 +59,31 @@ function submitTasacion(event) {
     const client_name = form.client_name.value;
     const client_phone = form.client_phone.value;
     
-    // ⚠️ CAMBIÁ ESTO POR TU NÚMERO REAL
+    // ⚠️ VERIFICÁ ESTO: Solo números, sin +, espacios ni guiones
     const tuNumeroWhatsApp = '5492235254339'; 
     
-    // Armamos el mensaje usando \n para los saltos de línea (es más limpio)
-    const mensaje = `🚗 *CONSULTA DE TASACIÓN - GUZZI AUTOS*\n\n` +
-                    `*Datos del Auto:*\n` +
-                    ` Marca: ${brand}\n` +
-                    `📌 Modelo: ${model}\n` +
-                    `📌 Año: ${year}\n` +
-                    `📌 Kilometraje: ${kilometers}\n` +
-                    ` Estado: ${condition}\n\n` +
-                    `*Datos del Cliente:*\n` +
-                    `👤 Nombre: ${client_name}\n` +
-                    `📞 Teléfono: ${client_phone}\n\n` +
-                    `Quisiera saber el valor de tasación. ¡Gracias!`;
+    // Armamos el mensaje usando \n REAL (no %0A)
+    // encodeURIComponent se encarga de transformarlos correctamente
+    const mensaje = 
+        "🚗 *CONSULTA DE TASACIÓN - GUZZI AUTOS*\n\n" +
+        "*Datos del Auto:*\n" +
+        "📌 Marca: " + brand + "\n" +
+        "📌 Modelo: " + model + "\n" +
+        "📌 Año: " + year + "\n" +
+        "📌 Kilometraje: " + kilometers + "\n" +
+        " Estado: " + condition + "\n\n" +
+        "*Datos del Cliente:*\n" +
+        "👤 Nombre: " + client_name + "\n" +
+        "📞 Teléfono: " + client_phone + "\n\n" +
+        "Quisiera saber el valor de tasación. ¡Gracias!";
     
-    // encodeURIComponent transforma los emojis y espacios para que la URL no se rompa
-    const whatsappURL = `https://wa.me/${tuNumeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+    // Codificamos TODO el mensaje junto
+    const whatsappURL = "https://wa.me/" + tuNumeroWhatsApp + "?text=" + encodeURIComponent(mensaje);
     
-    // Abrir WhatsApp
+    // Abrimos en nueva pestaña. 
+    // Si el navegador bloquea esto, probá cambiar '_blank' por '_self' temporalmente para testear.
     window.open(whatsappURL, '_blank');
     
-    // Limpiar el formulario después de enviar
     form.reset();
 }
 
