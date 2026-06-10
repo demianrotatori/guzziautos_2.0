@@ -50,7 +50,6 @@ function submitTasacion(event) {
     
     const form = event.target;
     
-    // Obtener los valores
     const brand = form.brand.value;
     const model = form.model.value;
     const year = form.year.value;
@@ -59,29 +58,24 @@ function submitTasacion(event) {
     const client_name = form.client_name.value;
     const client_phone = form.client_phone.value;
     
-    // ⚠️ VERIFICÁ ESTO: Solo números, sin +, espacios ni guiones
     const tuNumeroWhatsApp = '5492235254339'; 
     
-    // Armamos el mensaje usando \n REAL (no %0A)
-    // encodeURIComponent se encarga de transformarlos correctamente
+    // Usamos códigos Unicode para los emojis (más confiable)
     const mensaje = 
-        "🚗 *CONSULTA DE TASACIÓN - GUZZI AUTOS*\n\n" +
+        "\uD83D\uDE97 *CONSULTA DE COTIZACIÓN - GUZZI AUTOS*\n\n" +
         "*Datos del Auto:*\n" +
-        "📌 Marca: " + brand + "\n" +
-        "📌 Modelo: " + model + "\n" +
-        "📌 Año: " + year + "\n" +
-        "📌 Kilometraje: " + kilometers + "\n" +
+        "\uD83D\uDCCC Marca: " + brand + "\n" +
+        "\uD83D\uDCCC Modelo: " + model + "\n" +
+        "\uD83D\uDCCC Año: " + year + "\n" +
+        "\uD83D\uDCCC Kilometraje: " + kilometers + "\n" +
         " Estado: " + condition + "\n\n" +
         "*Datos del Cliente:*\n" +
-        "👤 Nombre: " + client_name + "\n" +
-        "📞 Teléfono: " + client_phone + "\n\n" +
-        "Quisiera saber el valor de tasación. ¡Gracias!";
+        "\uD83D\uDC64 Nombre: " + client_name + "\n" +
+        "\uD83D\uDCE1 Teléfono: " + client_phone + "\n\n" +
+        "Quisiera saber el valor de cotización. ¡Gracias!";
     
-    // Codificamos TODO el mensaje junto
     const whatsappURL = "https://wa.me/" + tuNumeroWhatsApp + "?text=" + encodeURIComponent(mensaje);
     
-    // Abrimos en nueva pestaña. 
-    // Si el navegador bloquea esto, probá cambiar '_blank' por '_self' temporalmente para testear.
     window.open(whatsappURL, '_blank');
     
     form.reset();
