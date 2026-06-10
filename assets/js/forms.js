@@ -62,14 +62,14 @@ function submitTasacion(event) {
     
     // Usamos códigos Unicode para los emojis (más confiable)
     const mensaje = 
-        "*CONSULTA DE COTIZACIÓN - GUZZI AUTOS*\n\n" +
+        "*CONSULTA DE COTIZACIÓN*\n\n" +
         "*Datos del Auto:*\n" +
         "-Marca: " + brand + "\n" +
         "-Modelo: " + model + "\n" +
         "-Año: " + year + "\n" +
         "-Kilometraje: " + kilometers + "\n" +
         "-Estado: " + condition + "\n\n" +
-        "*Datos del Cliente:*\n" +
+        "*Datos de contacto:*\n" +
         "-Nombre: " + client_name + "\n" +
         "-Teléfono: " + client_phone + "\n\n" +
         "Quisiera saber el valor de cotización. ¡Gracias!";
