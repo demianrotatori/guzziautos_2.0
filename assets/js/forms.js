@@ -62,16 +62,16 @@ function submitTasacion(event) {
     
     // Usamos códigos Unicode para los emojis (más confiable)
     const mensaje = 
-        "\uD83D\uDE97 *CONSULTA DE COTIZACIÓN - GUZZI AUTOS*\n\n" +
+        "*CONSULTA DE COTIZACIÓN - GUZZI AUTOS*\n\n" +
         "*Datos del Auto:*\n" +
-        "\uD83D\uDCCC Marca: " + brand + "\n" +
-        "\uD83D\uDCCC Modelo: " + model + "\n" +
-        "\uD83D\uDCCC Año: " + year + "\n" +
-        "\uD83D\uDCCC Kilometraje: " + kilometers + "\n" +
-        " Estado: " + condition + "\n\n" +
+        "-Marca: " + brand + "\n" +
+        "-Modelo: " + model + "\n" +
+        "-Año: " + year + "\n" +
+        "-Kilometraje: " + kilometers + "\n" +
+        "-Estado: " + condition + "\n\n" +
         "*Datos del Cliente:*\n" +
-        "\uD83D\uDC64 Nombre: " + client_name + "\n" +
-        "\uD83D\uDCE1 Teléfono: " + client_phone + "\n\n" +
+        "-Nombre: " + client_name + "\n" +
+        "-Teléfono: " + client_phone + "\n\n" +
         "Quisiera saber el valor de cotización. ¡Gracias!";
     
     const whatsappURL = "https://wa.me/" + tuNumeroWhatsApp + "?text=" + encodeURIComponent(mensaje);
