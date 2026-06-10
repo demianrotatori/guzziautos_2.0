@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guzzi Autos - Elegí tu camino</title>
+
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Configuración Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#08090b',
+                            darkGray: '#101216',
+                            card: '#16191f',
+                            red: '#e63946',
+                            redNeon: '#ff2a3b',
+                            redHover: '#bd1f2d',
+                            cream: '#f5f2eb',
+                            gold: '#ebdcb9',
+                            muted: '#94a3b8'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <!-- Meta Pixel (carga primero para registrar eventos tempranos) -->
+    <script src="assets/js/tracking.js" defer></script>
+</head>
+<body class="bg-brand-dark text-brand-cream font-sans antialiased overflow-x-hidden">
+
+    <!-- NOTIFICACIONES TOAST -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-3 max-w-sm w-full pointer-events-none"></div>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="fixed top-0 left-0 w-full z-40 glass-header border-b border-white/5 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#hero" class="flex items-center gap-3 group">
+                <img src="assets/images/logo.png" alt="Guzzi Autos" 
+                     onerror="this.src='https://placehold.co/180x50/101216/ff2a3b?text=Guzzi+Autos'" 
+                     class="h-12 md:h-14 w-auto object-contain mix-blend-screen transition-transform duration-500 group-hover:scale-105">
+            </a>
+
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="#catalogo" class="text-sm font-medium hover:text-brand-gold transition-colors">Catálogo</a>
+                <a href="#financiacion" class="text-sm font-medium hover:text-brand-gold transition-colors">Financiación</a>
+                <a href="#tasacion" class="text-sm font-medium hover:text-brand-gold transition-colors">Tasar Mi Auto</a>
+                <a href="#contacto" class="text-sm font-medium hover:text-brand-gold transition-colors">Contacto</a>
+            </nav>
+
+            <button onclick="toggleMobileMenu()" class="md:hidden text-brand-cream focus:outline-none">
+                <i data-lucide="menu" id="menu-icon" class="h-6 w-6"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-dark border-t border-white/5 px-4 pt-4 pb-6 space-y-3">
+            <a href="#catalogo" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium hover:text-brand-gold">Catálogo</a>
+            <a href="#financiacion" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium hover:text-brand-gold">Financiación</a>
+            <a href="#tasacion" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium hover:text-brand-gold">Tasar Mi Auto</a>
+            <a href="#contacto" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium hover:text-brand-gold">Contacto</a>
+            <div class="pt-4 border-t border-white/5 flex flex-col gap-3">
+                <a href="#contacto" onclick="toggleMobileMenu()" class="w-full text-center py-3 text-sm font-bold tracking-wider uppercase bg-brand-red text-white rounded-lg">
+                    Consultar Ahora
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center pt-8 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,42,59,0.08)_0%,transparent_65%)]"></div>
+            <div class="absolute inset-0 bg-[linear-gradient(to_right,#14171c_1px,transparent_1px),linear-gradient(to_bottom,#14171c_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-20"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-0 text-center w-full">
+            <div class="inline-flex flex-col items-center w-full max-w-5xl mx-auto px-4">
+                <img src="assets/images/logo.png" 
+                     alt="Guzzi Autos" 
+                     onerror="this.src='https://placehold.co/1200x600/101216/ff2a3b?text=Guzzi+Autos'" 
+                     class="w-full h-auto object-contain mix-blend-screen">
+            </div>
+
+            <p class="max-w-2xl mx-auto text-brand-muted text-sm md:text-lg mt-[-10px] sm:mt-[-10px] mb-10 font-light opacity-80 relative z-20">
+                Descubrí una colección seleccionada de vehículos premium. Transparencia absoluta, financiación a tu medida y una experiencia de compra diseñada para acompañarte en cada kilómetro.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#catalogo" class="w-full sm:w-auto px-8 py-4 bg-brand-red text-white hover:bg-brand-redHover font-semibold tracking-wider rounded-xl transition-all duration-300 text-center hover:scale-105 filter drop-shadow-[0_5px_15px_rgba(230,57,70,0.3)]">
+                    Explorar Catálogo
+                </a>
+                <a href="#tasacion" class="w-full sm:w-auto px-8 py-4 bg-transparent text-brand-cream hover:bg-white/5 border border-white/20 font-semibold tracking-wider rounded-xl transition-all duration-300 text-center">
+                    Tasar Mi Auto
+                </a>
+            </div>
+
+            <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 pt-10 border-t border-white/5 max-w-4xl mx-auto">
+                <div>
+                    <span class="block text-3xl font-bold text-brand-gold font-serif">150+</span>
+                    <span class="text-xs text-brand-muted uppercase tracking-wider">Autos Entregados</span>
+                </div>
+                <div>
+                    <span class="block text-3xl font-bold text-brand-gold font-serif">100%</span>
+                    <span class="text-xs text-brand-muted uppercase tracking-wider">Garantía Escrita</span>
+                </div>
+                <div>
+                    <span class="block text-3xl font-bold text-brand-gold font-serif">24hs</span>
+                    <span class="text-xs text-brand-muted uppercase tracking-wider">Tasación Express</span>
+                </div>
+                <div>
+                    <span class="block text-3xl font-bold text-brand-gold font-serif">4.9/5</span>
+                    <span class="text-xs text-brand-muted uppercase tracking-wider">Calificación Google</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CATÁLOGO -->
+    <section id="catalogo" class="py-24 bg-brand-darkGray relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center md:text-left md:flex md:items-end md:justify-between mb-12">
+                <div>
+                    <span class="text-xs font-bold text-brand-redNeon uppercase tracking-[0.25em] block mb-2">Vehículos Disponibles</span>
+                    <h2 class="text-3xl md:text-5xl font-serif font-bold text-brand-cream">Nuestro Catálogo Exclusivo</h2>
+                </div>
+                <p class="text-brand-muted max-w-md mt-4 md:mt-0 font-light text-sm">
+                    Unidades estrictamente seleccionadas y peritadas mecánicamente con documentación al día.
+                </p>
+            </div>
+
+            <div class="bg-brand-card p-6 rounded-2xl border border-white/5 mb-10 shadow-xl">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+                    <div>
+                        <label class="block text-xs font-medium text-brand-muted mb-2 uppercase tracking-wider">Buscar Modelo</label>
+                        <div class="relative">
+                            <input type="text" id="filter-search" oninput="applyFilters()" placeholder="Ej: Audi, BMW, Hilux..." class="w-full bg-brand-dark border border-white/10 rounded-xl px-4 py-3 pl-10 text-sm text-brand-cream focus:outline-none focus:border-brand-red transition-all">
+                            <i data-lucide="search" class="absolute left-3.5 top-3.5 h-4 w-4 text-brand-muted"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-brand-muted mb-2 uppercase tracking-wider">Categoría</label>
+                        <select id="filter-type" onchange="applyFilters()" class="w-full bg-brand-dark border border-white/10 rounded-xl px-4 py-3 text-sm text-brand-cream focus:outline-none focus:border-brand-red transition-all">
+                            <option value="">Todas las categorías</option>
+                            <option value="Deportivo">Deportivos</option>
+                            <option value="Sedán">Sedán</option>
+                            <option value="SUV">SUV / Todo Terreno</option>
+                            <option value="Pickup">Pickups</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-brand-muted mb-2 uppercase tracking-wider">Ordenar por</label>
+                        <select id="filter-sort" onchange="applyFilters()" class="w-full bg-brand-dark border border-white/10 rounded-xl px-4 py-3 text-sm text-brand-cream focus:outline-none focus:border-brand-red transition-all">
+                            <option value="destacado">Destacados</option>
+                            <option value="precio-asc">Precio: Menor a Mayor</option>
+                            <option value="precio-desc">Precio: Mayor a Menor</option>
+                            <option value="anio-desc">Año: Más Nuevos Primero</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button onclick="clearFilters()" class="w-full bg-brand-dark hover:bg-zinc-800 text-brand-cream border border-white/5 rounded-xl py-3 text-sm font-medium transition-colors flex items-center justify-center gap-2">
+                            <i data-lucide="refresh-cw" class="h-4 w-4"></i> Limpiar Filtros
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="catalog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+
+            <div id="no-results" class="hidden text-center py-20 bg-brand-card rounded-2xl border border-white/5">
+                <i data-lucide="info" class="h-12 w-12 text-brand-muted mx-auto mb-4"></i>
+                <h3 class="text-lg font-semibold text-brand-cream">No encontramos vehículos que coincidan</h3>
+                <p class="text-brand-muted text-sm mt-1">Intentá ajustando tus criterios de búsqueda.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINANCIACIÓN -->
+    <section id="financiacion" class="py-24 bg-brand-dark relative">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,42,59,0.06)_0%,transparent_50%)]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-5">
+                    <span class="text-xs font-bold text-brand-redNeon uppercase tracking-[0.25em] block mb-2">Financiación Flexible</span>
+                    <h2 class="text-3xl md:text-5xl font-serif font-bold text-brand-cream mb-6">Llevátelo hoy, pagalo en cuotas fijas</h2>
+                    <p class="text-brand-muted mb-8 font-light text-sm md:text-base leading-relaxed">
+                        Ofrecemos planes de crédito exclusivos con aprobación inmediata en concesionaria. Trabajamos con tasas preferenciales para que alcances tu meta.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-3">
+                            <span class="flex items-center justify-center h-8 w-8 rounded-full bg-brand-red/10 text-brand-redNeon">
+                                <i data-lucide="check" class="h-4 w-4"></i>
+                            </span>
+                            <span class="text-sm font-medium">Hasta el 50% del valor del vehículo financiado</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="flex items-center justify-center h-8 w-8 rounded-full bg-brand-red/10 text-brand-redNeon">
+                                <i data-lucide="check" class="h-4 w-4"></i>
+                            </span>
+                            <span class="text-sm font-medium">Cuotas fijas en dólares o pesos</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-7 bg-brand-card p-8 rounded-3xl border border-white/5 neon-card-hover shadow-2xl transition-all duration-300">
+                    <h3 class="text-xl font-bold font-serif mb-6 text-brand-gold flex items-center gap-2">
+                        <i data-lucide="calculator" class="h-5 w-5 text-brand-redNeon"></i> Simulá Tu Crédito
+                    </h3>
+
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-xs font-semibold uppercase tracking-wider text-brand-muted">Valor de Referencia (USD)</label>
+                            <span id="simulator-val-vehicle-txt" class="text-lg font-bold text-brand-cream">USD 30.000</span>
+                        </div>
+                        <input type="range" id="simulator-val-vehicle" min="10000" max="150000" step="5000" value="30000" oninput="updateSimulator()" class="w-full accent-brand-red bg-zinc-800 rounded-lg h-2 cursor-pointer">
+                    </div>
+
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-xs font-semibold uppercase tracking-wider text-brand-muted">Anticipo / Entrega (USD)</label>
+                            <span id="simulator-val-downpayment-txt" class="text-lg font-bold text-brand-gold">USD 15.000</span>
+                        </div>
+                        <input type="range" id="simulator-val-downpayment" min="5000" max="100000" step="2500" value="15000" oninput="updateSimulator()" class="w-full accent-brand-red bg-zinc-800 rounded-lg h-2 cursor-pointer">
+                        <div class="flex justify-between text-[10px] text-brand-muted mt-1">
+                            <span id="min-downpayment-label">Mín. (30%)</span>
+                            <span id="max-downpayment-label">Máx. (80%)</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-brand-muted mb-3">Plazo de Pago</label>
+                        <div class="grid grid-cols-4 gap-2">
+                            <button onclick="setInstallmentTerm(12)" id="btn-term-12" class="py-3 text-sm font-semibold rounded-xl bg-zinc-800 text-zinc-300 hover:bg-zinc-700 border border-white/5">12 Meses</button>
+                            <button onclick="setInstallmentTerm(24)" id="btn-term-24" class="py-3 text-sm font-semibold rounded-xl bg-brand-red text-white border border-brand-red">24 Meses</button>
+                            <button onclick="setInstallmentTerm(36)" id="btn-term-36" class="py-3 text-sm font-semibold rounded-xl bg-zinc-800 text-zinc-300 hover:bg-zinc-700 border border-white/5">36 Meses</button>
+                            <button onclick="setInstallmentTerm(48)" id="btn-term-48" class="py-3 text-sm font-semibold rounded-xl bg-zinc-800 text-zinc-300 hover:bg-zinc-700 border border-white/5">48 Meses</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-brand-dark p-6 rounded-2xl border border-white/5 mb-6">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <span class="text-[10px] uppercase tracking-wider text-brand-muted block">Monto a Financiar</span>
+                                <span id="sim-financed-amount" class="text-lg font-bold text-brand-cream">USD 15.000</span>
+                            </div>
+                            <div>
+                                <span class="text-[10px] uppercase tracking-wider text-brand-muted block">Tasa Preferencial (TNA)</span>
+                                <span class="text-lg font-bold text-brand-gold">12.5%</span>
+                            </div>
+                        </div>
+                        <div class="border-t border-white/5 mt-4 pt-4 flex justify-between items-end">
+                            <div>
+                                <span class="text-[10px] uppercase tracking-wider text-brand-muted block">Cuota Mensual Estimada</span>
+                                <span class="text-xs text-brand-muted">(Fija en USD)</span>
+                            </div>
+                            <span id="sim-monthly-payment" class="text-2xl md:text-3xl font-serif font-bold text-brand-redNeon">USD 715/mes</span>
+                        </div>
+                    </div>
+
+                    <button onclick="openFinancingModal()" class="w-full py-4 bg-brand-red text-white hover:bg-brand-redHover font-semibold tracking-wider rounded-xl transition-all duration-300 flex items-center justify-center gap-2">
+                        Solicitar Pre-Aprobación <i data-lucide="chevron-right" class="h-4 w-4"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TASACIÓN -->
+    <section id="tasacion" class="py-24 bg-brand-darkGray relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-xs font-bold text-brand-redNeon uppercase tracking-[0.25em] block mb-2">Entregá tu usado</span>
+                <h2 class="text-3xl md:text-5xl font-serif font-bold text-brand-cream">Cotización Online Al Instante</h2>
+            </div>
+
+            <form id="tasacion-form" onsubmit="submitTasacion(event)" class="bg-brand-card p-8 rounded-3xl border border-white/5 shadow-2xl">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-xs font-semibold text-brand-muted mb-2 uppercase tracking-wider">Marca</label>
+                        <input type="text" name="brand" required placeholder="Ej: Volkswagen" class="w-full bg-brand-dark border border-white/10 rounded-xl px-4 py-3 text-sm text-brand-cream focus:outline-none focus:border-brand-red">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-brand-muted mb-2 uppercase tracking-wider">Modelo y Versión</label>
+                        <input type="text" name="model" required placeholder="Ej: Fox Trendline 1.6" class="w-full bg-brand-dark border border-white/10 rounded-xl px-4 py-3 text-sm text-brand-cream focus:outline-none focus:border-brand-red">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-brand-muted mb-2 uppercase tracking-wider">Año de Fabricación</label>
+                        <input type="number" name="year" required min="1990" max="2027" placeholder="Ej: 2015" class="w-full bg-brand-dark border border-white/10 rounded-xl px-4 py-3 text-sm text-brand-cream focus:outline-none focus:border-brand-red">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-brand-muted mb-2 uppercase tracking-wider">Kilometraje Actual</label>
+                        <input type="text" name="kilometers" required placeholder="Ej: 95.000 km" class="w-full bg-brand-dark border border-white/10 rounded-xl px-4 py-3 text-sm text-brand-cream focus:outline-none focus:border-brand-red">
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-xs font-semibold text-brand-muted mb-2 uppercase tracking-wider">Estado General</label>
+                    <div class="grid grid-cols-3 gap-2">
+                        <label class="flex items-center justify-center py-3 border border-white/10 rounded-xl bg-brand-dark text-xs cursor-pointer hover:border-brand-red transition-all">
+                            <input type="radio" name="condition" value="Excelente" checked class="hidden peer">
+                            <span class="peer-checked:text-brand-redNeon font-medium">Excelente</span>
+                        </label>
+                        <label class="flex items-center justify-center py-3 border border-white/10 rounded-xl bg-brand-dark text-xs cursor-pointer hover:border-brand-red transition-all">
+                            <input type="radio" name="condition" value="Muy Bueno" class="hidden peer">
+                            <span class="peer-checked:text-brand-redNeon font-medium">Muy Bueno</span>
+                        </label>
+                        <label class="flex items-center justify-center py-3 border border-white/10 rounded-xl bg-brand-dark text-xs cursor-pointer hover:border-brand-red transition-all">
+                            <input type="radio" name="condition" value="Bueno/Detalles" class="hidden peer">
+                            <span class="peer-checked:text-brand-redNeon font-medium">Bueno / Detalles</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="border-t border-white/5 pt-6 mt-6">
+                    <h4 class="text-sm font-semibold text-brand-gold uppercase tracking-wider mb-4">Tus Datos de Contacto</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold text-brand-muted mb-2 uppercase tracking-wider">Nombre Completo</label>
+                            <input type="text" name="client_name" required placeholder="Ingresá tu nombre" class="w-full bg-brand-dark border border-white/10 rounded-xl px-4 py-3 text-sm text-brand-cream focus:outline-none focus:border-brand-red">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-brand-muted mb-2 uppercase tracking-wider">Teléfono / WhatsApp</label>
+                            <input type="tel" name="client_phone" required placeholder="Ej: +54 9 223 123-4567" class="w-full bg-brand-dark border border-white/10 rounded-xl px-4 py-3 text-sm text-brand-cream focus:outline-none focus:border-brand-red">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full mt-8 py-4 bg-brand-red text-white hover:bg-brand-redHover font-semibold tracking-wider rounded-xl transition-all duration-300 flex items-center justify-center gap-2">
+                    Enviar Datos para Tasar <i data-lucide="send" class="h-4 w-4"></i>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="py-24 bg-brand-dark relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <div class="lg:col-span-5 flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-brand-redNeon uppercase tracking-[0.25em] block mb-2">Comunícate</span>
+                        <h2 class="text-3xl md:text-5xl font-serif font-bold text-brand-cream mb-6">¿Tenés preguntas? Contactanos</h2>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-xl bg-brand-card border border-white/5 text-brand-redNeon">
+                                <i data-lucide="map-pin" class="h-5 w-5"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs text-brand-muted uppercase tracking-wider block">Showroom</span>
+                                <span class="text-sm font-semibold text-brand-cream">Av. Independencia 2500, Mar del Plata</span>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-xl bg-brand-card border border-white/5 text-brand-redNeon">
+                                <i data-lucide="phone" class="h-5 w-5"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs text-brand-muted uppercase tracking-wider block">Teléfono Ventas</span>
+                                <span class="text-sm font-semibold text-brand-cream">+54 223 499-0000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-8 border-t border-white/5 flex gap-4">
+                        <a href="#" class="p-3 bg-brand-card rounded-xl hover:bg-zinc-800 transition-colors text-brand-muted hover:text-brand-gold">
+                            <i data-lucide="instagram" class="h-5 w-5"></i>
+                        </a>
+                        <a href="#" class="p-3 bg-brand-card rounded-xl hover:bg-zinc-800 transition-colors text-brand-muted hover:text-brand-gold">
+                            <i data-lucide="facebook" class="h-5 w-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7">
+                    <form id="contacto-form" onsubmit="submitContacto(event)" class="bg-brand-card p-8 rounded-3xl border border-white/5 shadow-2xl">
+                        <h3 class="text-xl font-bold font-serif mb-6 text-brand-gold">Dejanos tu consulta</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-xs font-semibold text-brand-muted mb-2 uppercase tracking-wider">Nombre Completo</label>
+                                <input type="text" name="name" required placeholder="Tu nombre" class="w-full bg-brand-dark border border-white/10 rounded-xl px-4 py-3 text-sm text-brand-cream focus:outline-none focus:border-brand-red">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-brand-muted mb-2 uppercase tracking-wider">Correo Electrónico</label>
+                                <input type="email" name="email" required placeholder="Tu mail" class="w-full bg-brand-dark border border-white/10 rounded-xl px-4 py-3 text-sm text-brand-cream focus:outline-none focus:border-brand-red">
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-xs font-semibold text-brand-muted mb-2 uppercase tracking-wider">Asunto de interés</label>
+                            <select name="subject" class="w-full bg-brand-dark border border-white/10 rounded-xl px-4 py-3 text-sm text-brand-cream focus:outline-none focus:border-brand-red">
+                                <option value="Consulta General">Consulta General</option>
+                                <option value="Agendar Test Drive">Agendar Test Drive</option>
+                                <option value="Financiación">Financiamiento</option>
+                            </select>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-xs font-semibold text-brand-muted mb-2 uppercase tracking-wider">Mensaje</label>
+                            <textarea name="message" rows="4" required placeholder="Escribí aquí tu mensaje..." class="w-full bg-brand-dark border border-white/10 rounded-xl px-4 py-3 text-sm text-brand-cream focus:outline-none focus:border-brand-red resize-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 bg-brand-red text-white hover:bg-brand-redHover font-semibold tracking-wider rounded-xl transition-all duration-300 flex items-center justify-center gap-2">
+                            Enviar Mensaje <i data-lucide="send" class="h-4 w-4"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-dark border-t border-white/5 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex flex-col items-center md:items-start">
+                <img src="assets/images/logo.png" alt="Guzzi Autos" 
+                     onerror="this.src='https://placehold.co/150x45/101216/ff2a3b?text=Guzzi+Autos'" 
+                     class="h-9 w-auto object-contain opacity-80 mb-2 mix-blend-screen">
+                <p class="text-xs text-brand-muted mt-2">&copy; 2026 Guzzi Autos. Elegí tu camino. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODALES -->
+    <div id="car-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brand-dark/80 backdrop-blur-sm hidden">
+        <div class="bg-brand-card w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl border border-white/10 shadow-2xl relative">
+            <button onclick="closeModal()" class="absolute top-4 right-4 p-2 bg-brand-dark/50 hover:bg-zinc-800 text-brand-cream rounded-full z-10">
+                <i data-lucide="x" class="h-5 w-5"></i>
+            </button>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+    <div id="financing-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brand-dark/80 backdrop-blur-sm hidden">
+        <div class="bg-brand-card w-full max-w-lg rounded-3xl border border-white/10 shadow-2xl p-6 relative">
+            <button onclick="closeFinancingModal()" class="absolute top-4 right-4 p-2 bg-zinc-800 hover:bg-zinc-700 text-brand-cream rounded-full">
+                <i data-lucide="x" class="h-5 w-5"></i>
+            </button>
+            <h3 class="text-2xl font-serif font-bold text-brand-gold mb-4">Solicitar Pre-Aprobación</h3>
+            <form id="pre-approved-form" onsubmit="submitFinancing(event)" class="space-y-4">
+                <div class="bg-brand-dark p-3 rounded-xl border border-white/5 text-xs grid grid-cols-2 gap-2 mb-4">
+                    <div><span class="text-[10px] text-brand-muted block">VALOR:</span><span id="fin-modal-val">-</span></div>
+                    <div><span class="text-[10px] text-brand-muted block">ANTICIPO:</span><span id="fin-modal-down" class="font-bold text-brand-gold">-</span></div>
+                    <div><span class="text-[10px] text-brand-muted block">PLAZO:</span><span id="fin-modal-term">-</span></div>
+                    <div><span class="text-[10px] text-brand-muted block">CUOTA:</span><span id="fin-modal-payment" class="font-bold text-brand-redNeon">-</span></div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-brand-muted mb-2">Nombre Completo</label>
+                    <input type="text" name="fin_name" required class="w-full bg-brand-dark border border-white/10 rounded-xl px-4 py-3 text-sm text-brand-cream">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-brand-muted mb-2">WhatsApp</label>
+                    <input type="tel" name="fin_phone" required class="w-full bg-brand-dark border border-white/10 rounded-xl px-4 py-3 text-sm text-brand-cream">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-brand-muted mb-2">DNI</label>
+                    <input type="text" name="fin_dni" required class="w-full bg-brand-dark border border-white/10 rounded-xl px-4 py-3 text-sm text-brand-cream">
+                </div>
+                <button type="submit" class="w-full mt-6 py-4 bg-brand-red text-white hover:bg-brand-redHover font-semibold tracking-wider rounded-xl">
+                    Enviar Solicitud Financiera
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- SCRIPTS (orden importante: data → utilidades → app) -->
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/catalog.js"></script>
+    <script src="assets/js/simulator.js"></script>
+    <script src="assets/js/forms.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
